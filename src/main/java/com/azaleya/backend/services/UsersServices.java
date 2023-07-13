@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.azaleya.backend.dto.UsersDTO;
 import com.azaleya.backend.entites.Users;
@@ -34,6 +36,16 @@ public class UsersServices {
 	public UsersDTO findByID(Long id) {
 		Optional<Users> user= repository.findById(id);
 		Users entity = user.orElseThrow(()->new com.azaleya.backend.services.exception.EntityNotFoundException("Usuario Não encontrado"));
+		return new UsersDTO(entity);
+	}
+	@Transactional
+	public UsersDTO insertUsers(UsersDTO user) {
+		Users entity = new Users();
+		entity.setNome(user.getNome());
+		entity.setEmail(user.getEmail());
+		entity.setTelefone(user.getTelefone());
+		entity.setNome_parceiro(user.getNome_parceiro());
+		entity=repository.save(entity);
 		return new UsersDTO(entity);
 	}
 	
