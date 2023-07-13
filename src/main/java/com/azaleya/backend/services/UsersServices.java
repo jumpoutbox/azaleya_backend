@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.cache.spi.support.AbstractEntityDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.azaleya.backend.dto.UsersDTO;
 import com.azaleya.backend.entites.Users;
 import com.azaleya.backend.repository.UsersRepository;
+import com.azaleya.backend.services.exception.DataBaseException;
 import com.azaleya.backend.services.exception.ResourceNotFoundException;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -64,6 +68,17 @@ public class UsersServices {
 			throw new ResourceNotFoundException("Id not found " + id);
 		}
 		
+	}
+	
+	public void delete(Long id) {
+		try {
+			repository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("Id not found "+id);
+		}
+		catch(DataIntegrityViolationException e) {
+			throw new DataBaseException("Violação de integridade!");
+		}
 	}
 	
 }
