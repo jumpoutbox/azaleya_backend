@@ -12,6 +12,8 @@ import com.azaleya.backend.dto.UsersDTO;
 import com.azaleya.backend.entites.Users;
 import com.azaleya.backend.repository.UsersRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UsersServices {
 	@Autowired
@@ -31,7 +33,7 @@ public class UsersServices {
 	@Transactional(readOnly = true)
 	public UsersDTO findByID(Long id) {
 		Optional<Users> user= repository.findById(id);
-		Users entity = user.get();
+		Users entity = user.orElseThrow(()->new com.azaleya.backend.services.exception.EntityNotFoundException("Usuario Não encontrado"));
 		return new UsersDTO(entity);
 	}
 	
