@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.azaleya.backend.dto.UsersDTO;
 import com.azaleya.backend.entites.Users;
 import com.azaleya.backend.repository.UsersRepository;
+import com.azaleya.backend.services.exception.ResourceNotFoundException;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -35,7 +36,7 @@ public class UsersServices {
 	@Transactional(readOnly = true)
 	public UsersDTO findByID(Long id) {
 		Optional<Users> user= repository.findById(id);
-		Users entity = user.orElseThrow(()->new com.azaleya.backend.services.exception.EntityNotFoundException("Usuario Não encontrado"));
+		Users entity = user.orElseThrow(()->new com.azaleya.backend.services.exception.ResourceNotFoundException("Usuario Não encontrado"));
 		return new UsersDTO(entity);
 	}
 	@Transactional
@@ -47,6 +48,22 @@ public class UsersServices {
 		entity.setNome_parceiro(user.getNome_parceiro());
 		entity=repository.save(entity);
 		return new UsersDTO(entity);
+	}
+	@Transactional
+	public UsersDTO update(Long id, UsersDTO user) {
+		try {
+			Users entity = repository.getOne(id);
+			entity.setNome(user.getNome());
+			entity.setNome(user.getNome());
+			entity.setEmail(user.getEmail());
+			entity.setTelefone(user.getTelefone());
+			entity.setNome_parceiro(user.getNome_parceiro());
+			entity=repository.save(entity);
+			return new UsersDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
+		
 	}
 	
 }
