@@ -2,6 +2,7 @@ package com.azaleya.backend.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class UsersServices {
 	@Autowired
 	private UsersRepository repository;
 	
-	@Transactional
+	@Transactional(readOnly= true)
 	public List<UsersDTO> findAll(){
 		List<Users> list_ = repository.findAll();
 		
@@ -27,4 +28,11 @@ public class UsersServices {
 		
 		return listDao;
 	}
+	@Transactional(readOnly = true)
+	public UsersDTO findByID(Long id) {
+		Optional<Users> user= repository.findById(id);
+		Users entity = user.get();
+		return new UsersDTO(entity);
+	}
+	
 }
