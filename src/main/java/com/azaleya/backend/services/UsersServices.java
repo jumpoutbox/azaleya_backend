@@ -8,6 +8,8 @@ import org.hibernate.cache.spi.support.AbstractEntityDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,15 +29,17 @@ public class UsersServices {
 	private UsersRepository repository;
 	
 	@Transactional(readOnly= true)
-	public List<UsersDTO> findAll(){
-		List<Users> list_ = repository.findAll();
+	public Page<UsersDTO> findAllPaged(PageRequest pageRequest){
+		Page<Users> list_ = repository.findAll(pageRequest);
 		
-		List<UsersDTO> listDao = new ArrayList<>();
+		return list_.map(x->new UsersDTO(x));
+		
+		/*Page<UsersDTO> listDao = new ArrayList<>();
 		for(Users user:list_) {
 			listDao.add(new UsersDTO(user));
 		}
 		
-		return listDao;
+		return listDao;*/
 	}
 	@Transactional(readOnly = true)
 	public UsersDTO findByID(Long id) {
