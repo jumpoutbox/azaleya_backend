@@ -1,5 +1,7 @@
 package com.azaleya.backend.dto;
 
+import com.azaleya.backend.entites.Guest;
+
 public class GuestDTO {
 	private Long id;
 	private String name;
@@ -9,10 +11,10 @@ public class GuestDTO {
 
 	}
 
-	public GuestDTO(Long id, String name, Boolean confirmation) {
-		this.id=id;
-		this.name=name;
-		this.confirmation=confirmation;
+	public GuestDTO(Guest guest) {
+		this.id=guest.getId();
+		this.name=guest.getName();
+		this.confirmation=guest.getConfirmation();
 	}
 
 	public Long getId() {
