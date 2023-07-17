@@ -10,18 +10,18 @@ import jakarta.persistence.Id;
 @Entity
 public class Users implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO )
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	private Long id;
-	
+
 	private String nome;
 	private String email;
 	private int telefone;
 	private String nome_parceiro;
-	
+
 	public Users() {
-		
+
 	}
 	public Users(Long id, String nome, String email, int telefone, String nome_parceiro ) {
 		this.id=id;
@@ -60,6 +60,6 @@ public class Users implements Serializable {
 	public void setNome_parceiro(String nome_parceiro) {
 		this.nome_parceiro = nome_parceiro;
 	}
-	
-	
+
+
 }
