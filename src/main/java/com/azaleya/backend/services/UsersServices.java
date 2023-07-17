@@ -1,19 +1,15 @@
 package com.azaleya.backend.services;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.cache.spi.support.AbstractEntityDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 import com.azaleya.backend.dto.UsersDTO;
 import com.azaleya.backend.entites.Users;
@@ -62,7 +58,6 @@ public class UsersServices {
 		try {
 			Users entity = repository.getOne(id);
 			entity.setNome(user.getNome());
-			entity.setNome(user.getNome());
 			entity.setEmail(user.getEmail());
 			entity.setTelefone(user.getTelefone());
 			entity.setNome_parceiro(user.getNome_parceiro());
@@ -73,7 +68,7 @@ public class UsersServices {
 		}
 		
 	}
-	
+	@Transactional
 	public void delete(Long id) {
 		try {
 			repository.deleteById(id);
