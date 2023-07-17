@@ -62,7 +62,6 @@ public class UsersServices {
 		try {
 			Users entity = repository.getOne(id);
 			entity.setNome(user.getNome());
-			entity.setNome(user.getNome());
 			entity.setEmail(user.getEmail());
 			entity.setTelefone(user.getTelefone());
 			entity.setNome_parceiro(user.getNome_parceiro());
