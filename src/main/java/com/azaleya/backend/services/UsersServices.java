@@ -23,18 +23,18 @@ import jakarta.persistence.EntityNotFoundException;
 public class UsersServices {
 	@Autowired
 	private UsersRepository repository;
-	
+
 	@Transactional(readOnly= true)
 	public Page<UsersDTO> findAllPaged(PageRequest pageRequest){
 		Page<Users> list_ = repository.findAll(pageRequest);
-		
+
 		return list_.map(x->new UsersDTO(x));
-		
+
 		/*Page<UsersDTO> listDao = new ArrayList<>();
 		for(Users user:list_) {
 			listDao.add(new UsersDTO(user));
 		}
-		
+
 		return listDao;*/
 	}
 	@Transactional(readOnly = true)
@@ -66,7 +66,7 @@ public class UsersServices {
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found " + id);
 		}
-		
+
 	}
 	@Transactional
 	public void delete(Long id) {
@@ -79,5 +79,5 @@ public class UsersServices {
 			throw new DataBaseException("Violação de integridade!");
 		}
 	}
-	
+
 }
