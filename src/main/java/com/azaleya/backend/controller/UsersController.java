@@ -34,7 +34,7 @@ public class UsersController {
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy
 			){
-		
+
 		PageRequest pageRequest=PageRequest.of(page, linesPerPage,Direction.valueOf(direction),orderBy);
 		Page<UsersDTO> list = services.findAllPaged(pageRequest);
 		return ResponseEntity.ok().body(list);
@@ -47,12 +47,12 @@ public class UsersController {
 		return ResponseEntity.ok(dto);
 	}
 
-	@PostMapping(value = "/user")
+	/*@PostMapping(value = "/user")
 	public ResponseEntity<UsersDTO> insertUsers(@RequestBody UsersDTO users) {
 		users = services.insertUsers(users);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{/id}").buildAndExpand(users.getId()).toUri();
 		return ResponseEntity.created(uri).body(users);
-	}
+	}*/
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<UsersDTO> putUser(@PathVariable Long id, @RequestBody UsersDTO dto) {

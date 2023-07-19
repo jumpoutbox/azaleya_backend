@@ -3,7 +3,7 @@ package com.azaleya.backend.dto;
 import com.azaleya.backend.entites.Users;
 
 public class UsersDTO {
-	private Long id;
+	private String id;
 
 	private String nome;
 	private String email;
@@ -14,7 +14,7 @@ public class UsersDTO {
 
 	}
 
-	public UsersDTO(Long id, String nome, String email, int telefone, String nome_parceiro) {
+	public UsersDTO(String id, String nome, String email, int telefone, String nome_parceiro) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -30,11 +30,11 @@ public class UsersDTO {
 		this.nome_parceiro = users.getNome_parceiro();
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

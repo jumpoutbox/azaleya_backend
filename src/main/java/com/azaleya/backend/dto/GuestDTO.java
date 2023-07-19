@@ -3,7 +3,7 @@ package com.azaleya.backend.dto;
 import com.azaleya.backend.entites.Guest;
 
 public class GuestDTO {
-	private Long id;
+	private String id;
 	private String name;
 	private Boolean confirmation;
 
@@ -17,11 +17,11 @@ public class GuestDTO {
 		this.confirmation=guest.getConfirmation();
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -40,5 +40,5 @@ public class GuestDTO {
 	public void setConfirmation(Boolean confirmation) {
 		this.confirmation = confirmation;
 	}
-	
+
 }

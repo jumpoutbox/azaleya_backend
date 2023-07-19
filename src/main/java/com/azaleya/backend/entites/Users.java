@@ -2,38 +2,72 @@ package com.azaleya.backend.entites;
 
 import java.io.Serializable;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-public class Users implements Serializable {
+@Table(name = "tb_user")
+public class Users implements UserDetails, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY )
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.UUID )
+	private String id;
 
 	private String nome;
+
+	@Column(unique = true)
 	private String email;
+
+	private String password;
+
+	private UserRole role;
+
 	private int telefone;
 	private String nome_parceiro;
+
+	@OneToMany(mappedBy="user")
+	private Set<CheckList> toDoList = new HashSet<>();
 
 	public Users() {
 
 	}
-	public Users(Long id, String nome, String email, int telefone, String nome_parceiro ) {
+	public Users(String id, String nome, String email, int telefone, String nome_parceiro, String password ) {
 		this.id=id;
 		this.nome=nome;
 		this.email=email;
 		this.telefone=telefone;
 		this.nome_parceiro=nome_parceiro;
+		this.password = password;
 	}
-	public Long getId() {
+	public Users(String id, String nome, String email, int telefone, String nome_parceiro, String password, UserRole role) {
+		this.id=id;
+		this.nome=nome;
+		this.email=email;
+		this.telefone=telefone;
+		this.nome_parceiro=nome_parceiro;
+		this.password = password;
+		this.role = role;
+	}
+
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getNome() {
@@ -61,5 +95,48 @@ public class Users implements Serializable {
 		this.nome_parceiro = nome_parceiro;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public UserRole getRole() {
+		return role;
+	}
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+
+	@Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 }
