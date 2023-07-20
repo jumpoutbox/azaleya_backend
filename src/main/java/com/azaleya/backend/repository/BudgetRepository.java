@@ -1,11 +1,9 @@
 package com.azaleya.backend.repository;
 
+import com.azaleya.backend.entites.Budget;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.azaleya.backend.entites.Guest;
-
 @Repository
-public interface GuestRepository extends JpaRepository<Guest, String>{
-
+public interface BudgetRepository extends JpaRepository<Budget, String> {
 }

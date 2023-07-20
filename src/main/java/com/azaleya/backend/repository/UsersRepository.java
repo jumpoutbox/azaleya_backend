@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.azaleya.backend.entites.Users;
 
 @Repository
-public interface UsersRepository extends JpaRepository<Users, Long> {
+public interface UsersRepository extends JpaRepository<Users, String> {
 
     UserDetails findByEmail(String email);
 

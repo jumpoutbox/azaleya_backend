@@ -2,17 +2,10 @@ package com.azaleya.backend.entites;
 
 import java.io.Serializable;
 
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -42,6 +35,10 @@ public class Users implements UserDetails, Serializable {
 
 	@OneToMany(mappedBy="user")
 	private Set<CheckList> toDoList = new HashSet<>();
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "budget_id", referencedColumnName = "id")
+	private Budget budget;
 
 	public Users() {
 
@@ -93,6 +90,22 @@ public class Users implements UserDetails, Serializable {
 	}
 	public void setNome_parceiro(String nome_parceiro) {
 		this.nome_parceiro = nome_parceiro;
+	}
+
+	public Set<CheckList> getToDoList() {
+		return toDoList;
+	}
+
+	public void setToDoList(Set<CheckList> toDoList) {
+		this.toDoList = toDoList;
+	}
+
+	public Budget getBudget() {
+		return budget;
+	}
+
+	public void setBudget(Budget budget) {
+		this.budget = budget;
 	}
 
 	public String getPassword() {

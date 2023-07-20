@@ -31,7 +31,7 @@ public class GuestServices {
 		return list.map(x->new GuestDTO(x));
 	}
 	@Transactional(readOnly = true)
-	public GuestDTO findByID(Long id) {
+	public GuestDTO findByID(String id) {
 		Optional<Guest> guest = repository.findById(id);
 		Guest entity=guest.orElseThrow(()->new ResourceNotFoundException("Guest not found"));
 		return new GuestDTO(entity);
@@ -45,7 +45,7 @@ public class GuestServices {
 		return new GuestDTO(entity);
 	}
 	@Transactional
-	public GuestDTO update(Long id, GuestDTO guest) {
+	public GuestDTO update(String id, GuestDTO guest) {
 		try {
 			Guest entity = repository.getOne(id);
 			entity.setName(guest.getName());
@@ -57,7 +57,7 @@ public class GuestServices {
 		}
 	}
 	@Transactional
-	public void delete(Long id) {
+	public void delete(String id) {
 		try {
 			repository.deleteById(id);
 		}catch (EmptyResultDataAccessException e) {

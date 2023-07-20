@@ -1,6 +1,11 @@
 package com.azaleya.backend.dto;
 
+import com.azaleya.backend.entites.Budget;
+import com.azaleya.backend.entites.CheckList;
 import com.azaleya.backend.entites.Users;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class UsersDTO {
 	private String id;
@@ -9,6 +14,10 @@ public class UsersDTO {
 	private String email;
 	private int telefone;
 	private String nome_parceiro;
+
+	private Set<CheckList> toDoList = new HashSet<>();
+
+	private Budget budget;
 
 	public UsersDTO() {
 
@@ -68,5 +77,21 @@ public class UsersDTO {
 
 	public void setNome_parceiro(String nome_parceiro) {
 		this.nome_parceiro = nome_parceiro;
+	}
+
+	public Set<CheckList> getToDoList() {
+		return toDoList;
+	}
+
+	public void setToDoList(Set<CheckList> toDoList) {
+		this.toDoList = toDoList;
+	}
+
+	public Budget getBudget() {
+		return budget;
+	}
+
+	public void setBudget(Budget budget) {
+		this.budget = budget;
 	}
 }

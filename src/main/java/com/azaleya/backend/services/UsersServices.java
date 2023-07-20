@@ -38,7 +38,7 @@ public class UsersServices {
 		return listDao;*/
 	}
 	@Transactional(readOnly = true)
-	public UsersDTO findByID(Long id) {
+	public UsersDTO findByID(String id) {
 		Optional<Users> user= repository.findById(id);
 		Users entity = user.orElseThrow(()->new com.azaleya.backend.services.exception.ResourceNotFoundException("Usuario Não encontrado"));
 		return new UsersDTO(entity);
@@ -54,7 +54,7 @@ public class UsersServices {
 		return new UsersDTO(entity);
 	}
 	@Transactional
-	public UsersDTO update(Long id, UsersDTO user) {
+	public UsersDTO update(String id, UsersDTO user) {
 		try {
 			Users entity = repository.getOne(id);
 			entity.setNome(user.getNome());
@@ -69,7 +69,7 @@ public class UsersServices {
 
 	}
 	@Transactional
-	public void delete(Long id) {
+	public void delete(String id) {
 		try {
 			repository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
