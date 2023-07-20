@@ -6,7 +6,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.azaleya.backend.todoApp.entites.Users;
+import com.azaleya.backend.weddingPlanner.entites.Users;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
