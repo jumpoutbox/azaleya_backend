@@ -14,7 +14,7 @@
 - [ ] LISTAR TODOS OS CHECKLIST DE UM DETERMINADO USUÁRIO
 - [ ] SEMPRE QUE O USUÁRIO CONTRATAR UM SERVIÇO O PREÇO DEVE REFLETIR NO BUDGET
 
-#### Chat
+### Chat
 - [ ] Deve ser possível o usuário trocar mensagens com o supplier
 
 ### ECommerce
