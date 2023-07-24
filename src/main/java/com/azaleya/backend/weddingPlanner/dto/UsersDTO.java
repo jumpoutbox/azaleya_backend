@@ -9,14 +9,11 @@ import java.util.Set;
 
 public class UsersDTO {
 	private String id;
-
 	private String nome;
 	private String email;
 	private int telefone;
 	private String nome_parceiro;
-
 	private Set<CheckList> toDoList = new HashSet<>();
-
 	private Budget budget;
 
 	public UsersDTO() {
@@ -37,6 +34,7 @@ public class UsersDTO {
 		this.email = users.getEmail();
 		this.telefone = users.getTelefone();
 		this.nome_parceiro = users.getNome_parceiro();
+		//this.budget = users.getBudget();
 	}
 
 	public String getId() {
