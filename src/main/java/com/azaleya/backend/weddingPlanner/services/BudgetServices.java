@@ -3,9 +3,12 @@ package com.azaleya.backend.weddingPlanner.services;
 import com.azaleya.backend.weddingPlanner.dto.BudgetDTO;
 import com.azaleya.backend.weddingPlanner.entites.Budget;
 import com.azaleya.backend.weddingPlanner.repository.BudgetRepository;
+import com.azaleya.backend.weddingPlanner.services.exception.DataBaseException;
 import com.azaleya.backend.weddingPlanner.services.exception.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +32,6 @@ public class BudgetServices {
         entity = budgetRepository.save(entity);
         return new BudgetDTO(entity);
     }
-
     @Transactional
     public BudgetDTO update(String id, BudgetDTO dto) {
         try{
@@ -39,6 +41,18 @@ public class BudgetServices {
             return new BudgetDTO(entity);
         }catch (EntityNotFoundException e){
             throw new ResourceNotFoundException("Id not found "+ id);
+        }
+    }
+
+    @Transactional
+    public void delete(String id) {
+        try {
+            budgetRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException("Id not found "+id);
+        }
+        catch(DataIntegrityViolationException e) {
+            throw new DataBaseException("Violação de integridade!");
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.azaleya.backend.weddingPlanner.entites;
 
+import com.azaleya.backend.weddingPlanner.dto.BudgetDTO;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -28,6 +29,9 @@ public class Budget implements Serializable {
         this.id = id;
         this.budget = budget;
         this.user = user;
+    }
+
+    public Budget(BudgetDTO budget) {
     }
 
     public String getId() {

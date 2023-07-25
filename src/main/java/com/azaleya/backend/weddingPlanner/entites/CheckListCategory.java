@@ -1,6 +1,7 @@
 package com.azaleya.backend.weddingPlanner.entites;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_checklistCategoria")
+@EqualsAndHashCode(of = "id")
 public class CheckListCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;

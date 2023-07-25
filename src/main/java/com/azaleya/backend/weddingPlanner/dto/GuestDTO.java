@@ -11,10 +11,16 @@ public class GuestDTO {
 
 	}
 
+	public GuestDTO(String id, String name, Boolean confirmation) {
+		this.id = id;
+		this.name = name;
+		this.confirmation = confirmation;
+	}
+
 	public GuestDTO(Guest guest) {
-		this.id=guest.getId();
-		this.name=guest.getName();
-		this.confirmation=guest.getConfirmation();
+		id=guest.getId();
+		name=guest.getName();
+		confirmation=guest.getConfirmation();
 	}
 
 	public String getId() {

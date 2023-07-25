@@ -1,7 +1,9 @@
 package com.azaleya.backend.weddingPlanner.services;
 
+
 import java.util.Optional;
 
+import com.azaleya.backend.weddingPlanner.entites.Budget;
 import com.azaleya.backend.weddingPlanner.repository.UsersRepository;
 import com.azaleya.backend.weddingPlanner.services.exception.DataBaseException;
 import com.azaleya.backend.weddingPlanner.services.exception.ResourceNotFoundException;
@@ -12,8 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-
 import com.azaleya.backend.weddingPlanner.dto.UsersDTO;
 import com.azaleya.backend.weddingPlanner.entites.Users;
 
@@ -27,15 +27,13 @@ public class UsersServices {
 	@Transactional(readOnly= true)
 	public Page<UsersDTO> findAllPaged(PageRequest pageRequest){
 		Page<Users> list_ = repository.findAll(pageRequest);
-
 		return list_.map(x->new UsersDTO(x));
-
 	}
 	@Transactional(readOnly = true)
 	public UsersDTO findByID(String id) {
 		Optional<Users> user= repository.findById(id);
 		Users entity = user.orElseThrow(()->new ResourceNotFoundException("Usuario Não encontrado"));
-		return new UsersDTO(entity);
+		return new UsersDTO(entity, entity.getToDoList().stream().toList());
 	}
 	@Transactional
 	public UsersDTO insertUsers(UsersDTO user) {
@@ -55,13 +53,12 @@ public class UsersServices {
 			entity.setEmail(user.getEmail());
 			entity.setTelefone(user.getTelefone());
 			entity.setNome_parceiro(user.getNome_parceiro());
-			entity.setBudget(user.getBudget());
+			entity.setBudget(new Budget(user.getBudget()));
 			entity=repository.save(entity);
 			return new UsersDTO(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found " + id);
 		}
-
 	}
 	@Transactional
 	public void delete(String id) {

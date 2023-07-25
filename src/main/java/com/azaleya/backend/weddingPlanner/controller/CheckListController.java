@@ -1,8 +1,6 @@
 package com.azaleya.backend.weddingPlanner.controller;
 
 import com.azaleya.backend.weddingPlanner.dto.CheckListDTO;
-import com.azaleya.backend.weddingPlanner.dto.ToDoInsertDTO;
-import com.azaleya.backend.weddingPlanner.entites.CheckList;
 import com.azaleya.backend.weddingPlanner.services.CheckListCategoryServices;
 import com.azaleya.backend.weddingPlanner.services.CheckListService;
 import jakarta.validation.Valid;
@@ -20,7 +18,6 @@ public class CheckListController {
 
     @Autowired
     private CheckListCategoryServices services;
-
     @Autowired
     private CheckListService service;
 

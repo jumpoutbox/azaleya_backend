@@ -43,7 +43,6 @@ public class CheckListService {
         Optional<CheckList> obj = repository.findById(id);
         CheckList entity = obj.orElseThrow(()->new ResourceNotFoundException("Entity not found!"));
         return new CheckListDTO(entity, entity.getCategoria());
-       // return new CheckListDTO(entity);
     }
 
    @Transactional
@@ -51,7 +50,6 @@ public class CheckListService {
         CheckList entity = new CheckList();
         copyDtoToEntity(dto, entity);
         entity = repository.save(entity);
-
         return new CheckListDTO(entity);
     }
 

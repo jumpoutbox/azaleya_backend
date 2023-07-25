@@ -5,6 +5,7 @@ import com.azaleya.backend.weddingPlanner.entites.CheckList;
 import com.azaleya.backend.weddingPlanner.entites.Users;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class UsersDTO {
@@ -13,8 +14,8 @@ public class UsersDTO {
 	private String email;
 	private int telefone;
 	private String nome_parceiro;
-	private Set<CheckList> toDoList = new HashSet<>();
-	private Budget budget;
+	private Set<CheckListDTO> toDoList = new HashSet<>();
+	private BudgetDTO budget;
 
 	public UsersDTO() {
 
@@ -34,7 +35,11 @@ public class UsersDTO {
 		this.email = users.getEmail();
 		this.telefone = users.getTelefone();
 		this.nome_parceiro = users.getNome_parceiro();
-		//this.budget = users.getBudget();
+		//this.budget = new BudgetDTO(users.getBudget());
+	}
+	public UsersDTO(Users entity, List<CheckList> todos) {
+		this(entity);
+		todos.forEach(todo -> this.toDoList.add(new CheckListDTO(todo)));
 	}
 
 	public String getId() {
@@ -77,19 +82,19 @@ public class UsersDTO {
 		this.nome_parceiro = nome_parceiro;
 	}
 
-	public Set<CheckList> getToDoList() {
+	public Set<CheckListDTO> getToDoList() {
 		return toDoList;
 	}
 
-	public void setToDoList(Set<CheckList> toDoList) {
+	public void setToDoList(Set<CheckListDTO> toDoList) {
 		this.toDoList = toDoList;
 	}
 
-	public Budget getBudget() {
+	public BudgetDTO getBudget() {
 		return budget;
 	}
 
-	public void setBudget(Budget budget) {
+	public void setBudgetDTO(BudgetDTO budget) {
 		this.budget = budget;
 	}
 }

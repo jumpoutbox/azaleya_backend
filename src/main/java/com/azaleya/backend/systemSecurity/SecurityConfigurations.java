@@ -29,6 +29,8 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers(HttpMethod.POST, "/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/**").permitAll()
                         //.requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         //.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         //.requestMatchers(HttpMethod.GET, "/user").hasRole("ADMIN")

@@ -25,7 +25,6 @@ public class CheckListDTO implements Serializable {
 
     public CheckListDTO(){
     }
-
     public CheckListDTO(String id, String toDo, String description, Instant tillDate, Boolean done) {
         this.id = id;
         this.toDo = toDo;
@@ -33,7 +32,6 @@ public class CheckListDTO implements Serializable {
         this.tillDate = tillDate;
         this.done = done;
     }
-
     public CheckListDTO(String id, String toDo, String description, Instant tillDate, Boolean done, UsersDTO user) {
         this.id = id;
         this.toDo = toDo;
@@ -47,6 +45,7 @@ public class CheckListDTO implements Serializable {
         toDo = entity.getToDo();
         description = entity.getDescription();;
         tillDate = entity.getTillDate();
+        done = entity.getDone();
     }
     public CheckListDTO(CheckList entity, Set<CheckListCategory> categorias){
         this(entity);
