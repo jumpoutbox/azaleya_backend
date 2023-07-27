@@ -2,7 +2,9 @@ package com.azaleya.backend.weddingPlanner.services;
 
 import com.azaleya.backend.weddingPlanner.dto.BudgetDTO;
 import com.azaleya.backend.weddingPlanner.entites.Budget;
+import com.azaleya.backend.weddingPlanner.entites.Users;
 import com.azaleya.backend.weddingPlanner.repository.BudgetRepository;
+import com.azaleya.backend.weddingPlanner.repository.UsersRepository;
 import com.azaleya.backend.weddingPlanner.services.exception.DataBaseException;
 import com.azaleya.backend.weddingPlanner.services.exception.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
@@ -18,6 +20,8 @@ import java.util.Optional;
 public class BudgetServices {
     @Autowired
     private BudgetRepository budgetRepository;
+    @Autowired
+    private UsersRepository userRepository;
 
     @Transactional(readOnly = true)
     public BudgetDTO findById(String id){
@@ -29,6 +33,8 @@ public class BudgetServices {
     public BudgetDTO insert(BudgetDTO dto) {
         Budget entity = new Budget();
         entity.setBudget(dto.getBudget());
+        Users user = userRepository.getReferenceById(dto.getUser().getId());
+        entity.setUser(user);
         entity = budgetRepository.save(entity);
         return new BudgetDTO(entity);
     }

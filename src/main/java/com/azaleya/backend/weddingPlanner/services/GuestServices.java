@@ -3,6 +3,10 @@ package com.azaleya.backend.weddingPlanner.services;
 
 import java.util.Optional;
 
+import com.azaleya.backend.weddingPlanner.entites.Mesas;
+import com.azaleya.backend.weddingPlanner.entites.Users;
+import com.azaleya.backend.weddingPlanner.repository.MesasRepository;
+import jakarta.persistence.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -23,23 +27,28 @@ import jakarta.persistence.EntityNotFoundException;
 public class GuestServices {
 	@Autowired
 	GuestRepository repository;
+
+	@Autowired
+	MesasRepository mesaRepository;
 	
 	@Transactional(readOnly = true)
 	public Page<GuestDTO> FindAllPaged(PageRequest pageRequest){
 		Page<Guest> list = repository.findAll(pageRequest);
-		return list.map(x->new GuestDTO(x));
+		return list.map(x->new GuestDTO(x, x.getMesa()));
 	}
 	@Transactional(readOnly = true)
 	public GuestDTO findByID(String id) {
 		Optional<Guest> guest = repository.findById(id);
 		Guest entity=guest.orElseThrow(()->new ResourceNotFoundException("Guest not found"));
-		return new GuestDTO(entity);
+		return new GuestDTO(entity, entity.getMesa());
 	}
 	@Transactional
 	public GuestDTO insertGuest(GuestDTO guest) {
 		Guest entity= new Guest();
 		entity.setName(guest.getName());
 		entity.setConfirmation(guest.getConfirmation());
+		Mesas mesa = mesaRepository.getReferenceById(guest.getMesa().getId());
+		entity.setMesa(mesa);
 		entity=repository.save(entity);
 		return new GuestDTO(entity);
 	}

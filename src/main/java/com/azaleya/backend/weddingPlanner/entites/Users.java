@@ -36,6 +36,9 @@ public class Users implements UserDetails, Serializable {
 	@OneToMany(mappedBy="user")
 	private Set<CheckList> toDoList = new HashSet<>();
 
+	@OneToMany(mappedBy="user")
+	private Set<Mesas> mesas = new HashSet<>();
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "budget_id", referencedColumnName = "id")
 	private Budget budget;
@@ -119,6 +122,14 @@ public class Users implements UserDetails, Serializable {
 	}
 	public void setRole(UserRole role) {
 		this.role = role;
+	}
+
+	public Set<Mesas> getMesas() {
+		return mesas;
+	}
+
+	public void setMesas(Set<Mesas> mesas) {
+		this.mesas = mesas;
 	}
 
 	@Override
