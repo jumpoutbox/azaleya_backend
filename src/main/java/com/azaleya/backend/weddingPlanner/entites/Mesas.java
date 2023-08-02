@@ -26,6 +26,10 @@ public class Mesas implements Serializable {
     @OneToMany(mappedBy="mesa")
     private Set<Guest> guests = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "mesa_categoria_id")
+    private MesasCategory mesasCategoria;
+
     public Mesas(){}
 
     public Mesas(String id, String nome) {
@@ -55,5 +59,13 @@ public class Mesas implements Serializable {
     }
     public void setGuests(Set<Guest> guests) {
         this.guests = guests;
+    }
+
+    public MesasCategory getMesasCategoria() {
+        return mesasCategoria;
+    }
+
+    public void setMesasCategoria(MesasCategory mesasCategoria) {
+        this.mesasCategoria = mesasCategoria;
     }
 }
