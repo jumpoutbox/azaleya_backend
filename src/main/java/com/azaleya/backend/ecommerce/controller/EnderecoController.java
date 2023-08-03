@@ -40,17 +40,25 @@ public class EnderecoController {
 		Page<EnderecoDTO> list = service.FindPage(pageRequest);
 		return ResponseEntity.ok().body(list);
 	}
+
+	@GetMapping(value= "/{id}")
+	public ResponseEntity<EnderecoDTO> findbyID(@PathVariable Long id){
+		EnderecoDTO list = service.findById(id);
+		return ResponseEntity.ok().body(list);
+	}
+
+
 	@PostMapping( value = "/{supplier_id}")
 	public ResponseEntity<EnderecoDTO> saveEndereco(@RequestBody EnderecoDTO dto, @PathVariable("supplier_id") Long id){
 		dto=service.saveEndereco(dto, id);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.status(HttpStatus.CREATED).body(dto);
 	}
-	@PutMapping(value = "/{id}")
+	/*@PutMapping(value = "/{id}")
 	public ResponseEntity<EnderecoDTO> editEndereco(@RequestBody EnderecoDTO dto,@PathVariable("id") Long id){
 		dto=service.updateEndereco(dto, id);
 		return ResponseEntity.ok(dto);
-	}
+	}*/
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable("id") Long id){
 		service.deleteEndereco(id);

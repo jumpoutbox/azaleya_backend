@@ -10,13 +10,13 @@ public class EnderecoDTO {
 	private int telefone;
 	private String provincia;
 
-	private Supplier supplier;
+	private SupplierDTO supplier;
 
 	public EnderecoDTO() {
 
 	}
 
-	public EnderecoDTO(Long id, String endereco, int telefone, String provincia, Supplier supplier) {
+	public EnderecoDTO(Long id, String endereco, int telefone, String provincia, SupplierDTO supplier) {
 		this.id = id;
 		this.endereco = endereco;
 		this.telefone = telefone;
@@ -29,7 +29,11 @@ public class EnderecoDTO {
 		this.endereco = endereco.getEndereco();
 		this.telefone = endereco.getTelefone();
 		this.provincia = endereco.getProvincia();
-		this.supplier = endereco.getSupplier();
+//		this.supplier = endereco.getSupplier();
+	}
+	public EnderecoDTO(Endereco endereco, Supplier supplier) {
+		this(endereco);
+		this.supplier = new SupplierDTO(supplier);
 	}
 
 	public Long getId() {
@@ -64,12 +68,11 @@ public class EnderecoDTO {
 		this.provincia = provincia;
 	}
 
-	public Supplier getSupplier() {
+	public SupplierDTO getSupplier() {
 		return supplier;
 	}
 
-	public void setSupplier(Supplier supplier) {
+	public void setSupplier(SupplierDTO supplier) {
 		this.supplier = supplier;
 	}
-
 }
