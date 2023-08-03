@@ -6,7 +6,7 @@ import com.azaleya.backend.ecommerce.entities.Endereco;
 import com.azaleya.backend.ecommerce.entities.Supplier;
 
 public class SupplierDTO {
-	private Long id;
+	private String id;
 	private String nome;
 	private String nif;
 	private String email;
@@ -25,10 +25,10 @@ public class SupplierDTO {
 		this.pass=entity.getPass();
 		this.imgPerfilUrl=entity.getImgPerfilUrl();
 	}
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getNome() {

@@ -18,8 +18,8 @@ public class Supplier implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy =  GenerationType.AUTO )
-	private Long id;
+	@GeneratedValue(strategy =  GenerationType.UUID )
+	private String id;
 	
 	private String nome;
 	private String nif;
@@ -32,7 +32,7 @@ public class Supplier implements Serializable {
 	public Supplier() {
 		
 	}
-	public Supplier(Long id, String nome, String nif, String email, String pass, String imgPerfilUrl) {
+	public Supplier(String id, String nome, String nif, String email, String pass, String imgPerfilUrl) {
 		this.id = id;
 		this.nome = nome;
 		this.nif = nif;
@@ -40,10 +40,10 @@ public class Supplier implements Serializable {
 		this.pass = pass;
 		this.imgPerfilUrl = imgPerfilUrl;
 	}
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getNome() {

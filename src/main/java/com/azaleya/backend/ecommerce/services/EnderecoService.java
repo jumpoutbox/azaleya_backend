@@ -31,14 +31,14 @@ public class EnderecoService {
 	}
 
 	@Transactional(readOnly = true)
-	public EnderecoDTO findById(Long id){
+	public EnderecoDTO findById(String id){
 		Optional<Endereco> obj = repository.findById(id);
 		Endereco entity = obj.orElseThrow(()->new ResourceNotFoundException("Entity not found!"));
 		return new EnderecoDTO(entity, entity.getSupplier());
 	}
 
 	@Transactional
-	public EnderecoDTO saveEndereco(EnderecoDTO dto, Long id) {
+	public EnderecoDTO saveEndereco(EnderecoDTO dto) {
 
 		/*Endereco SuplierID= supplierRepository.findById(id).map(supplier -> {
 			Endereco ende= new Endereco();
@@ -54,7 +54,7 @@ public class EnderecoService {
 		entity.setProvincia(dto.getProvincia());
 		entity.setTelefone(dto.getTelefone());
 
-		Supplier supplier = supplierRepository.getReferenceById(id);
+		Supplier supplier = supplierRepository.getReferenceById(dto.getSupplier().getId());
 
 		entity.setSupplier(supplier);
 
@@ -89,7 +89,7 @@ public class EnderecoService {
 	}*/
 
 	@Transactional
-	public void deleteEndereco(Long id) {
+	public void deleteEndereco(String id) {
 		try {
 			repository.deleteById(id);
 		} catch (Exception e) {

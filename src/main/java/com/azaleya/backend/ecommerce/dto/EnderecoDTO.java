@@ -4,7 +4,7 @@ import com.azaleya.backend.ecommerce.entities.Endereco;
 import com.azaleya.backend.ecommerce.entities.Supplier;
 
 public class EnderecoDTO {
-	private Long id;
+	private String id;
 
 	private String endereco;
 	private int telefone;
@@ -16,7 +16,7 @@ public class EnderecoDTO {
 
 	}
 
-	public EnderecoDTO(Long id, String endereco, int telefone, String provincia, SupplierDTO supplier) {
+	public EnderecoDTO(String id, String endereco, int telefone, String provincia, SupplierDTO supplier) {
 		this.id = id;
 		this.endereco = endereco;
 		this.telefone = telefone;
@@ -36,11 +36,11 @@ public class EnderecoDTO {
 		this.supplier = new SupplierDTO(supplier);
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

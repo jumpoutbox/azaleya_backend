@@ -37,7 +37,7 @@ public class SupplierServices {
 	}
 	
 	@Transactional
-	public SupplierDTO updteSupplier(SupplierDTO dto, Long id) {
+	public SupplierDTO updteSupplier(SupplierDTO dto, String id) {
 		try {
 			Supplier findId= repository.getOne(id);
 			findId.setEnderecos(dto.getEnderecos());
@@ -54,7 +54,7 @@ public class SupplierServices {
 		
 	}
 	@Transactional
-	public void deleteSupplier(Long id) {
+	public void deleteSupplier(String id) {
 		try {
 			repository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {

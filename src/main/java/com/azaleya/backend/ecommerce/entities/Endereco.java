@@ -15,8 +15,8 @@ import jakarta.persistence.Table;
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private String id;
 	
 	private String endereco;
 	private int telefone;
@@ -31,7 +31,7 @@ public class Endereco implements Serializable {
 	}
 	
 
-	public Endereco(Long id, String endereco, int telefone, String provincia, Supplier supplier) {
+	public Endereco(String id, String endereco, int telefone, String provincia, Supplier supplier) {
 		super();
 		this.id = id;
 		this.endereco = endereco;
@@ -42,11 +42,11 @@ public class Endereco implements Serializable {
 	
 
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -82,7 +82,7 @@ public class Endereco implements Serializable {
 		this.supplier = supplier;
 	}
 
-	public static long getSerialversionuid() {
+	public static Long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	

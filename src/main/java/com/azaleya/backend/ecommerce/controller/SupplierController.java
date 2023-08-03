@@ -47,12 +47,12 @@ public class SupplierController {
 		return ResponseEntity.created(uri).body(dto);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<SupplierDTO> update(@PathVariable("id") Long id, @RequestBody SupplierDTO dto ){
+	public ResponseEntity<SupplierDTO> update(@PathVariable("id") String id, @RequestBody SupplierDTO dto ){
 		dto = services.updteSupplier(dto, id);
 		return ResponseEntity.ok(dto);
 	}
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+	public ResponseEntity<Void> delete(@PathVariable("id") String id) {
 		services.deleteSupplier(id);
 		return ResponseEntity.noContent().build();
 	}
