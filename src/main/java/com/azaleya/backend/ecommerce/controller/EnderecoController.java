@@ -54,11 +54,11 @@ public class EnderecoController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(dto);
 	}
 
-	/*@PutMapping(value = "/{id}")
-	public ResponseEntity<EnderecoDTO> editEndereco(@RequestBody EnderecoDTO dto,@PathVariable("id") Long id){
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<EnderecoDTO> editEndereco(@RequestBody EnderecoDTO dto,@PathVariable("id") String id){
 		dto=service.updateEndereco(dto, id);
 		return ResponseEntity.ok(dto);
-	}*/
+	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable("id") String id){

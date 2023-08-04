@@ -1,5 +1,6 @@
 package com.azaleya.backend.ecommerce.services;
 
+import com.azaleya.backend.ecommerce.dto.SupplierDTO;
 import com.azaleya.backend.ecommerce.entities.Supplier;
 import com.azaleya.backend.weddingPlanner.dto.BudgetDTO;
 import com.azaleya.backend.weddingPlanner.entites.Budget;
@@ -40,7 +41,6 @@ public class EnderecoService {
 	@Transactional
 	public EnderecoDTO saveEndereco(EnderecoDTO dto) {
 
-
 		Endereco entity = new Endereco();
 		entity.setEndereco(dto.getEndereco());
 		entity.setProvincia(dto.getProvincia());
@@ -56,21 +56,23 @@ public class EnderecoService {
 		
 	}
 
-	/*@Transactional
-	public EnderecoDTO updateEndereco(EnderecoDTO dto, Long id) {
+	@Transactional
+	public EnderecoDTO updateEndereco(EnderecoDTO dto, String id) {
 		try {
-			Endereco endereco = repository.getOne(id);
+			Endereco endereco = repository.getReferenceById(id);
 			endereco.setEndereco(dto.getEndereco());
 			endereco.setProvincia(dto.getProvincia());
 			endereco.setTelefone(dto.getTelefone());
-			endereco.setSupplier(dto.getSupplier());
+
+			//Supplier entity = supplierRepository.getReferenceById(dto.getId());
+			//endereco.setSupplier(entity);
 			endereco = repository.save(endereco);
 			return new EnderecoDTO(endereco);
 		} catch (Exception e) {
-			throw new ResourceNotFoundException("Erro");
+			throw new ResourceNotFoundException("Erro nao consegimos alterar os dados");
 		}
 
-	}*/
+	}
 
 	@Transactional
 	public void deleteEndereco(String id) {

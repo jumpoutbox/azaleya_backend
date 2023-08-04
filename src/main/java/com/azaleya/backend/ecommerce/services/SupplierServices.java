@@ -46,7 +46,7 @@ public class SupplierServices {
 	@Transactional
 	public SupplierDTO updteSupplier(SupplierDTO dto, String id) {
 		try {
-			Supplier findId= repository.getOne(id);
+			Supplier findId= repository.getReferenceById(id);
 			findId.setEnderecos(dto.getEnderecos());
 			findId.setNome(dto.getNome());
 			findId.setPass(dto.getPass());
