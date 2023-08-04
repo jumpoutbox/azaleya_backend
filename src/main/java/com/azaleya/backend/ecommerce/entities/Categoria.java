@@ -2,6 +2,8 @@ package com.azaleya.backend.ecommerce.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_categoria")
 public class Categoria {
@@ -13,6 +15,9 @@ public class Categoria {
     private String nome;
 
     private String descricacao;
+
+    @OneToMany(mappedBy = "categoria",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Set<Produtos> categorias;
 
     public Categoria() {
     }

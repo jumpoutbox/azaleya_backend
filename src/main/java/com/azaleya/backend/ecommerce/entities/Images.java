@@ -2,6 +2,8 @@ package com.azaleya.backend.ecommerce.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_images")
 public class Images {
@@ -12,6 +14,9 @@ public class Images {
     private String id;
 
     private String url;
+
+    @OneToMany(mappedBy = "images", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Produtos> produtos;
 
     public Images() {
     }
@@ -36,4 +41,6 @@ public class Images {
     public void setUrl(String url) {
         this.url = url;
     }
+
+
 }

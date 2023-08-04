@@ -2,9 +2,13 @@ package com.azaleya.backend.ecommerce.dto;
 
 import com.azaleya.backend.ecommerce.entities.Images;
 
+import java.util.Set;
+
 public class ImagesDTO {
     private String id;
     private String url;
+
+    private Set<ProdutoDTO> produtoDTO;
 
     public ImagesDTO() {
     }
@@ -24,5 +28,9 @@ public class ImagesDTO {
 
     public String getUrl() {
         return url;
+    }
+
+    public Set<ProdutoDTO> getProdutoDTO() {
+        return produtoDTO;
     }
 }
