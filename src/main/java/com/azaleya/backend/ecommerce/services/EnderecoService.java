@@ -1,9 +1,6 @@
 package com.azaleya.backend.ecommerce.services;
 
-import com.azaleya.backend.ecommerce.dto.SupplierDTO;
 import com.azaleya.backend.ecommerce.entities.Supplier;
-import com.azaleya.backend.weddingPlanner.dto.BudgetDTO;
-import com.azaleya.backend.weddingPlanner.entites.Budget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
