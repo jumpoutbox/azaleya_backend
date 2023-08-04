@@ -40,15 +40,7 @@ public class EnderecoService {
 	@Transactional
 	public EnderecoDTO saveEndereco(EnderecoDTO dto) {
 
-		/*Endereco SuplierID= supplierRepository.findById(id).map(supplier -> {
-			Endereco ende= new Endereco();
-			dto.setSupplier(supplier);
-			ende.setSupplier(dto.getSupplier());
-			repository.save(ende);
 
-			return new Endereco();
-
-		}).orElseThrow();*/
 		Endereco entity = new Endereco();
 		entity.setEndereco(dto.getEndereco());
 		entity.setProvincia(dto.getProvincia());
@@ -61,14 +53,6 @@ public class EnderecoService {
 		repository.save(entity);
 
 		return new EnderecoDTO(entity);
-
-		
-		/*Endereco endereco = repository2.findById(id).map(supplier->{
-			dto.setSupplier(supplier);
-			dto=repository.save(dto);
-
-		}).orElseThrow();*/
-
 		
 	}
 

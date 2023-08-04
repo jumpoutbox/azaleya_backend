@@ -1,7 +1,9 @@
 package com.azaleya.backend.ecommerce.controller;
 
 import java.net.URI;
+import java.util.Optional;
 
+import com.azaleya.backend.ecommerce.entities.Supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,7 +41,11 @@ public class SupplierController {
 		Page<SupplierDTO> list = services.FindPage(pageRequest);
 		return ResponseEntity.ok().body(list);
 	}
-	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<SupplierDTO> findId(@PathVariable("id") String id ){
+		SupplierDTO object = services.FIndByID(id);
+		return ResponseEntity.ok().body(object);
+	}
 	@PostMapping
 	public ResponseEntity<SupplierDTO> inserir(@RequestBody SupplierDTO dto){
 		dto = services.saveSupplier(dto);

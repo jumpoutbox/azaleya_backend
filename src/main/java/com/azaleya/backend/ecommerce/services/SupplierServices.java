@@ -13,6 +13,8 @@ import com.azaleya.backend.ecommerce.dto.SupplierDTO;
 import com.azaleya.backend.ecommerce.entities.Supplier;
 import com.azaleya.backend.weddingPlanner.services.exception.ResourceNotFoundException;
 
+import java.util.Optional;
+
 @Service
 public class SupplierServices {
 	@Autowired
@@ -23,7 +25,12 @@ public class SupplierServices {
 		Page<Supplier>list=repository.findAll(pageRequest);
 		return list.map(x->new SupplierDTO(x));
 	}
-	
+	@Transactional(readOnly = true)
+	public SupplierDTO FIndByID(String id){
+		Optional<Supplier> findId = repository.findById(id);
+		Supplier entity = findId.orElseThrow(()->new ResourceNotFoundException("Erro"));
+        return new SupplierDTO(entity);
+	}
 	@Transactional
 	public SupplierDTO saveSupplier(SupplierDTO supplier) {
 		Supplier entity = new Supplier();
