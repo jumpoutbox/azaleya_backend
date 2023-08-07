@@ -26,11 +26,23 @@ public class ImagesDTO {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getUrl() {
         return url;
     }
 
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public Set<ProdutoDTO> getProdutoDTO() {
         return produtoDTO;
+    }
+
+    public void setProdutoDTO(Set<ProdutoDTO> produtoDTO) {
+        this.produtoDTO = produtoDTO;
     }
 }

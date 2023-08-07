@@ -1,7 +1,8 @@
 package com.azaleya.backend.ecommerce.entities;
 
 import jakarta.persistence.*;
-
+@Entity
+@Table(name = "tb_produtos")
 public class Produtos {
     private static final long serialVersionUID = 1L;
     @Id

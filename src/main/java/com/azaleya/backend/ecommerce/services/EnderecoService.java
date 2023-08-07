@@ -50,7 +50,7 @@ public class EnderecoService {
 		repository.save(entity);
 
 		return new EnderecoDTO(entity);
-		
+
 	}
 
 	@Transactional

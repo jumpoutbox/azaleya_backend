@@ -24,6 +24,7 @@ public class EnderecoDTO {
 		this.supplier = supplier;
 	}
 
+
 	public EnderecoDTO(Endereco endereco) {
 		this.id = endereco.getId();
 		this.endereco = endereco.getEndereco();

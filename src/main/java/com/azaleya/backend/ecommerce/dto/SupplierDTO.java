@@ -13,10 +13,11 @@ public class SupplierDTO {
 	private String pass;
 	private String imgPerfilUrl;
 	private Set<Endereco> enderecos;
-	
+
 	public SupplierDTO() {
-		
+
 	}
+
 	public SupplierDTO(Supplier entity) {
 		this.id=entity.getId();
 		this.nome=entity.getNome();
@@ -67,6 +68,6 @@ public class SupplierDTO {
 	public void setEnderecos(Set<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
-	
-	
+
+
 }

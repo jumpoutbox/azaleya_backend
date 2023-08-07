@@ -17,7 +17,7 @@ public class Categoria {
     private String descricacao;
 
     @OneToMany(mappedBy = "categoria",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Set<Produtos> categorias;
+    private Set<Produtos> produtos;
 
     public Categoria() {
     }
@@ -50,5 +50,13 @@ public class Categoria {
 
     public void setDescricacao(String descricacao) {
         this.descricacao = descricacao;
+    }
+
+    public Set<Produtos> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(Set<Produtos> produtos) {
+        this.produtos = produtos;
     }
 }

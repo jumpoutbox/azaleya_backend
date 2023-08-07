@@ -15,12 +15,11 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_supplier")
 public class Supplier implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy =  GenerationType.UUID )
 	private String id;
-	
+
 	private String nome;
 	private String nif;
 	private String email;
@@ -28,9 +27,9 @@ public class Supplier implements Serializable {
 	private String imgPerfilUrl;
 	@OneToMany(mappedBy = "supplier", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Endereco> enderecos;
-	
+
 	public Supplier() {
-		
+
 	}
 	public Supplier(String id, String nome, String nif, String email, String pass, String imgPerfilUrl) {
 		this.id = id;
@@ -82,6 +81,4 @@ public class Supplier implements Serializable {
 	public void setEnderecos(Set<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
-	
-	
 }

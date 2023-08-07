@@ -1,6 +1,8 @@
 package com.azaleya.backend.ecommerce.entities;
 
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -17,19 +19,19 @@ public class Endereco implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
-	
+
 	private String endereco;
 	private int telefone;
 	private String provincia;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "supplier_id")
 	private Supplier supplier;
-	
+
 	public Endereco() {
-		
+
 	}
-	
+
 
 	public Endereco(String id, String endereco, int telefone, String provincia, Supplier supplier) {
 		super();
@@ -39,7 +41,6 @@ public class Endereco implements Serializable {
 		this.provincia = provincia;
 		this.supplier = supplier;
 	}
-	
 
 
 	public String getId() {
@@ -85,6 +86,4 @@ public class Endereco implements Serializable {
 	public static Long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
 }

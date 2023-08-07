@@ -19,7 +19,7 @@ import java.util.Optional;
 public class SupplierServices {
 	@Autowired
 	SupplierRepository repository;
-	
+
 	@Transactional(readOnly = true)
 	public Page<SupplierDTO>FindPage(PageRequest pageRequest){
 		Page<Supplier>list=repository.findAll(pageRequest);
@@ -29,7 +29,7 @@ public class SupplierServices {
 	public SupplierDTO FIndByID(String id){
 		Optional<Supplier> findId = repository.findById(id);
 		Supplier entity = findId.orElseThrow(()->new ResourceNotFoundException("Erro"));
-        return new SupplierDTO(entity);
+		return new SupplierDTO(entity);
 	}
 	@Transactional
 	public SupplierDTO saveSupplier(SupplierDTO supplier) {
@@ -42,12 +42,12 @@ public class SupplierServices {
 		entity= repository.save(entity);
 		return new SupplierDTO(entity);
 	}
-	
+
 	@Transactional
 	public SupplierDTO updteSupplier(SupplierDTO dto, String id) {
 		try {
 			Supplier findId= repository.getReferenceById(id);
-			findId.setEnderecos(dto.getEnderecos());
+			//findId.setEnderecos(dto.setEnderecos());
 			findId.setNome(dto.getNome());
 			findId.setPass(dto.getPass());
 			findId.setNif(dto.getNif());
@@ -58,7 +58,7 @@ public class SupplierServices {
 		} catch (Exception e) {
 			throw new ResourceNotFoundException("Erro ao encontrar este fornecedor");
 		}
-		
+
 	}
 	@Transactional
 	public void deleteSupplier(String id) {
@@ -68,5 +68,4 @@ public class SupplierServices {
 			throw new ResourceNotFoundException("Naõ podes deletar um fornecedor que na existite");
 		}
 	}
-	
 }
