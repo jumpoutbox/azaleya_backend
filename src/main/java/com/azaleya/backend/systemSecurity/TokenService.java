@@ -1,5 +1,6 @@
 package com.azaleya.backend.systemSecurity;
 
+import com.azaleya.backend.ecommerce.entities.Supplier;
 import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
@@ -21,6 +22,19 @@ public class TokenService {
     private String secret;
 
     public String generateToken(Users user){
+        try{
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+            String token = JWT.create()
+                    .withIssuer("azaleya-api")
+                    .withSubject(user.getEmail())
+                    .withExpiresAt(genExpirationDate())
+                    .sign(algorithm);
+            return token;
+        } catch (JWTCreationException exception) {
+            throw new RuntimeException("Error while generating token", exception);
+        }
+    }
+    public String generateTokenSup(Supplier user){
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()

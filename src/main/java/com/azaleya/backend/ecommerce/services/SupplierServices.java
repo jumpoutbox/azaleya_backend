@@ -38,7 +38,7 @@ public class SupplierServices {
 		entity.setEmail(supplier.getEmail());
 		entity.setImgPerfilUrl(supplier.getImgPerfilUrl());
 		entity.setNif(supplier.getNif());
-		entity.setPass(supplier.getPass());
+		entity.setPassword(supplier.getPass());
 		entity= repository.save(entity);
 		return new SupplierDTO(entity);
 	}
@@ -49,7 +49,7 @@ public class SupplierServices {
 			Supplier findId= repository.getReferenceById(id);
 			//findId.setEnderecos(dto.setEnderecos());
 			findId.setNome(dto.getNome());
-			findId.setPass(dto.getPass());
+			findId.setPassword(dto.getPass());
 			findId.setNif(dto.getNif());
 			findId.setEmail(dto.getEmail());
 			findId.setImgPerfilUrl(dto.getImgPerfilUrl());

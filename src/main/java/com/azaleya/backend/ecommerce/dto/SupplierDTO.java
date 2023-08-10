@@ -14,6 +14,7 @@ public class SupplierDTO {
 	private String imgPerfilUrl;
 	private Set<Endereco> enderecos;
 
+
 	public SupplierDTO() {
 
 	}
@@ -23,7 +24,7 @@ public class SupplierDTO {
 		this.nome=entity.getNome();
 		this.nif=entity.getNif();
 		this.email=entity.getEmail();
-		this.pass=entity.getPass();
+		this.pass=entity.getPassword();
 		this.imgPerfilUrl=entity.getImgPerfilUrl();
 	}
 	public String getId() {
