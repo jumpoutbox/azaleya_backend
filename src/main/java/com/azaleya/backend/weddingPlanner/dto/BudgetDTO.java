@@ -18,7 +18,6 @@ public class BudgetDTO {
         id = entity.getId();
         budget = entity.getBudget();
     }
-
     public BudgetDTO(Budget entity, Users user) {
         this(entity);
         this.user = new UsersDTO(user);

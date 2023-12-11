@@ -1,6 +1,7 @@
 package com.azaleya.backend.weddingPlanner.controller;
 
 import com.azaleya.backend.weddingPlanner.dto.BudgetDTO;
+import com.azaleya.backend.weddingPlanner.dto.CheckListDTO;
 import com.azaleya.backend.weddingPlanner.services.BudgetServices;
 import com.azaleya.backend.weddingPlanner.services.UsersServices;
 import jakarta.validation.Valid;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RequestMapping(value = "/budget")
 @RestController
@@ -20,6 +22,12 @@ public class BudgetController {
     @Autowired
     private UsersServices userSevice;
 
+    @GetMapping
+    public ResponseEntity<List<BudgetDTO>> findAll(
+    ){
+        List<BudgetDTO> list = budgetServices.findAll();
+        return ResponseEntity.ok().body(list);
+    }
     @GetMapping(value = "/{id}")
     public ResponseEntity<BudgetDTO> findById(@PathVariable String id){
         BudgetDTO dto = budgetServices.findById(id);

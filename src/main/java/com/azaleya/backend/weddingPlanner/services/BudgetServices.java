@@ -1,7 +1,9 @@
 package com.azaleya.backend.weddingPlanner.services;
 
 import com.azaleya.backend.weddingPlanner.dto.BudgetDTO;
+import com.azaleya.backend.weddingPlanner.dto.CheckListDTO;
 import com.azaleya.backend.weddingPlanner.entites.Budget;
+import com.azaleya.backend.weddingPlanner.entites.CheckList;
 import com.azaleya.backend.weddingPlanner.entites.Users;
 import com.azaleya.backend.weddingPlanner.repository.BudgetRepository;
 import com.azaleya.backend.weddingPlanner.repository.UsersRepository;
@@ -14,7 +16,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BudgetServices {
@@ -23,6 +27,11 @@ public class BudgetServices {
     @Autowired
     private UsersRepository userRepository;
 
+    @Transactional(readOnly = true)
+    public List<BudgetDTO> findAll(){
+        List<Budget> list = budgetRepository.findAll();
+        return list.stream().map(x -> new BudgetDTO(x)).collect(Collectors.toList());
+    }
     @Transactional(readOnly = true)
     public BudgetDTO findById(String id){
         Optional<Budget> obj = budgetRepository.findById(id);

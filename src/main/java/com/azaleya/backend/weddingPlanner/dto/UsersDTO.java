@@ -35,11 +35,12 @@ public class UsersDTO {
 		this.email = users.getEmail();
 		this.telefone = users.getTelefone();
 		this.nome_parceiro = users.getNome_parceiro();
-		//this.budget = new BudgetDTO(users.getBudget());
+		this.budget = new BudgetDTO(users.getBudget());
 	}
-	public UsersDTO(Users entity, List<CheckList> todos) {
+	public UsersDTO(Users entity, List<CheckList> todos, Budget budget1) {
 		this(entity);
 		todos.forEach(todo -> this.toDoList.add(new CheckListDTO(todo)));
+		new BudgetDTO(budget1);
 	}
 
 	public String getId() {

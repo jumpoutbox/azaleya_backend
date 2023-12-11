@@ -33,7 +33,7 @@ public class UsersServices {
 	public UsersDTO findByID(String id) {
 		Optional<Users> user= repository.findById(id);
 		Users entity = user.orElseThrow(()->new ResourceNotFoundException("Usuario Não encontrado"));
-		return new UsersDTO(entity, entity.getToDoList().stream().toList());
+		return new UsersDTO(entity, entity.getToDoList().stream().toList(), entity.getBudget());
 	}
 	@Transactional
 	public UsersDTO insertUsers(UsersDTO user) {
