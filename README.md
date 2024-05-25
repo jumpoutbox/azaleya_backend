@@ -20,6 +20,9 @@
 - [ ] O USUÁRIO PODE CRIAR SUAS PRÓPRIAS CATEGORIAS
 - [ ] SEMPRE QUE SE CRIAR UM NOVO USUÁRIO EXECUTAR UM SEED DE CHECKLIST E MESA CATEGORY
 
+# Erros
+- [ ] Ao criar o Budget, não está associar directamento ao usuário que criou
+
 ### Chat
 - [ ] Deve ser possível o usuário trocar mensagens com o supplier
 
