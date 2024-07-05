@@ -1,6 +1,5 @@
 package com.flawless.backend.systemSecurity;
 
-import com.flawless.backend.ecommerce.entities.Supplier;
 import com.flawless.backend.weddingPlanner.entites.Users;
 import org.springframework.stereotype.Service;
 
@@ -22,19 +21,6 @@ public class TokenService {
     private String secret;
 
     public String generateToken(Users user){
-        try{
-            Algorithm algorithm = Algorithm.HMAC256(secret);
-            String token = JWT.create()
-                    .withIssuer("azaleya-api")
-                    .withSubject(user.getEmail())
-                    .withExpiresAt(genExpirationDate())
-                    .sign(algorithm);
-            return token;
-        } catch (JWTCreationException exception) {
-            throw new RuntimeException("Error while generating token", exception);
-        }
-    }
-    public String generateTokenSup(Supplier user){
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
