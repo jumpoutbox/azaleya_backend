@@ -3,6 +3,7 @@ package com.flawless.backend.weddingPlanner.dto;
 
 import com.flawless.backend.weddingPlanner.entites.CheckList;
 import com.flawless.backend.weddingPlanner.entites.CheckListCategory;
+import com.flawless.backend.weddingPlanner.entites.CheckListSystemCategory;
 import com.flawless.backend.weddingPlanner.entites.Users;
 
 import java.io.Serializable;
@@ -22,6 +23,7 @@ public class CheckListDTO implements Serializable {
     private Boolean done;
     private UsersDTO user;
     private Set<CheckListCategoryDTO> categorias = new HashSet<>();
+    private Set<CheckListCategoryDTO> systemCategory = new HashSet<>();
 
     public CheckListDTO(){
     }
@@ -43,13 +45,14 @@ public class CheckListDTO implements Serializable {
     public CheckListDTO(CheckList entity){
         id = entity.getId();
         toDo = entity.getToDo();
-        description = entity.getDescription();;
+        description = entity.getDescription();
         tillDate = entity.getTillDate();
         done = entity.getDone();
     }
-    public CheckListDTO(CheckList entity, Set<CheckListCategory> categorias){
+    public CheckListDTO(CheckList entity, Set<CheckListCategory> categorias, Set<CheckListSystemCategory> systemCategory){
         this(entity);
         categorias.forEach(cat -> this.categorias.add(new CheckListCategoryDTO(cat)));
+        systemCategory.forEach(syscat -> this.categorias.add(new CheckListCategoryDTO(syscat)));
     }
     public CheckListDTO(CheckList entity, Users user, Set<CheckListCategory> categorias){
         this(entity);
@@ -110,5 +113,13 @@ public class CheckListDTO implements Serializable {
 
     public void setCategorias(Set<CheckListCategoryDTO> categoria) {
         this.categorias = categoria;
+    }
+
+    public Set<CheckListCategoryDTO> getSystemCategory() {
+        return systemCategory;
+    }
+
+    public void setSystemCategory(Set<CheckListCategoryDTO> systemCategory) {
+        this.systemCategory = systemCategory;
     }
 }

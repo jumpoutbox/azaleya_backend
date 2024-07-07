@@ -23,7 +23,7 @@ public class BudgetServices {
     @Autowired
     private BudgetRepository budgetRepository;
     @Autowired
-    private UsersRepository userRepository;
+    private AuthorizationService authService;
 
     @Transactional(readOnly = true)
     public List<BudgetDTO> findAll(){
@@ -40,8 +40,7 @@ public class BudgetServices {
     public BudgetDTO insert(BudgetDTO dto) {
         Budget entity = new Budget();
         entity.setBudget(dto.getBudget());
-        Users user = userRepository.getReferenceById(dto.getUser().getId());
-        entity.setUser(user);
+        entity.setUser(authService.authenticated());
         entity = budgetRepository.save(entity);
         return new BudgetDTO(entity);
     }

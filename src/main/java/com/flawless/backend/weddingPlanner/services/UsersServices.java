@@ -24,16 +24,24 @@ public class UsersServices {
 	@Autowired
 	private UsersRepository repository;
 
+	@Autowired
+	private AuthorizationService authService;
+
 	@Transactional(readOnly= true)
 	public Page<UsersDTO> findAllPaged(PageRequest pageRequest){
-		Page<Users> list_ = repository.findAll(pageRequest);
-		return list_.map(x->new UsersDTO(x));
+		Page<Users> listUsers = repository.findAll(pageRequest);
+
+		return listUsers.map(UsersDTO::new);
 	}
 	@Transactional(readOnly = true)
 	public UsersDTO findByID(String id) {
+		authService.validateSelfOrAdmin(id);//Testando autorização
 		Optional<Users> user= repository.findById(id);
 		Users entity = user.orElseThrow(()->new ResourceNotFoundException("Usuario Não encontrado"));
-		return new UsersDTO(entity, entity.getToDoList().stream().toList(), entity.getBudget());
+		if(entity.getBudget() != null){
+			return new UsersDTO(entity, entity.getToDoList().stream().toList(), entity.getBudget());
+		}
+		return new UsersDTO(entity, entity.getToDoList().stream().toList());
 	}
 	@Transactional
 	public UsersDTO insertUsers(UsersDTO user) {

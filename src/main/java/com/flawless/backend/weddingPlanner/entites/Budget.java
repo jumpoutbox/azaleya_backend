@@ -3,11 +3,13 @@ package com.flawless.backend.weddingPlanner.entites;
 import com.flawless.backend.weddingPlanner.dto.BudgetDTO;
 import jakarta.persistence.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "tb_budget")
 public class Budget implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -15,7 +17,9 @@ public class Budget implements Serializable {
     private String id;
     private Double budget;
 
-    @OneToOne(mappedBy = "budget")
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Users user;
 
     public Budget(){}

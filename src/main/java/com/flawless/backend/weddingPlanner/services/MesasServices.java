@@ -27,7 +27,7 @@ public class MesasServices {
     GuestRepository guestRepository;
 
     @Autowired
-    UsersRepository userRepository;
+    AuthorizationService authService;
 
 
     @Transactional(readOnly = true)
@@ -51,7 +51,7 @@ public class MesasServices {
     @Transactional
     public MesasDTO update(String id, MesasDTO mesa) {
         try {
-            Mesas entity = repository.getOne(id);
+            Mesas entity = repository.getReferenceById(id);
             copyDtoToEntity(mesa, entity);
             entity=repository.save(entity);
             return new MesasDTO(entity);
@@ -72,7 +72,6 @@ public class MesasServices {
 
     private void copyDtoToEntity(MesasDTO dto, Mesas entity) {
         entity.setNome(dto.getNome());
-        Users user = userRepository.getReferenceById(dto.getUser().getId());
-        entity.setUser(user);
+        entity.setUser(authService.authenticated());
     }
 }

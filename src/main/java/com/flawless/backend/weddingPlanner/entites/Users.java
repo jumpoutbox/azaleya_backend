@@ -1,5 +1,6 @@
 package com.flawless.backend.weddingPlanner.entites;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import jakarta.persistence.*;
@@ -15,6 +16,7 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_user")
 public class Users implements UserDetails, Serializable {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -39,8 +41,7 @@ public class Users implements UserDetails, Serializable {
 	@OneToMany(mappedBy="user")
 	private Set<Mesas> mesas = new HashSet<>();
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "budget_id", referencedColumnName = "id")
+	@OneToOne(mappedBy = "user")
 	private Budget budget;
 
 	public Users() {
@@ -163,4 +164,10 @@ public class Users implements UserDetails, Serializable {
         return true;
     }
 
+    public boolean hasHole(String roleName) {
+		if (role.getRole().equals(roleName)) {
+				return true;
+		}
+		return false;
+    }
 }

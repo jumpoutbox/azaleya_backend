@@ -30,7 +30,7 @@ public class CheckListService {
     @Autowired
     private CheckListCategoryRepository catRepository;
     @Autowired
-    private UsersRepository userRepository;
+    AuthorizationService authService;
 
     @Transactional(readOnly = true)
     public List<CheckListDTO> findAll(){
@@ -42,7 +42,7 @@ public class CheckListService {
     public CheckListDTO findById(String id){
         Optional<CheckList> obj = repository.findById(id);
         CheckList entity = obj.orElseThrow(()->new ResourceNotFoundException("Entity not found!"));
-        return new CheckListDTO(entity, entity.getCategoria());
+        return new CheckListDTO(entity, entity.getCategoria(), entity.getSystem_category());
     }
 
    @Transactional
@@ -80,8 +80,7 @@ public class CheckListService {
         entity.setToDo(dto.getToDo());
         entity.setTillDate(dto.getTillDate());
         entity.setDone(dto.getDone());
-        Users user = userRepository.getReferenceById(dto.getUser().getId());
-        entity.setUser(user);
+        entity.setUser(authService.authenticated());
         entity.setDescription(dto.getDescription());
 
         entity.getCategoria().clear();

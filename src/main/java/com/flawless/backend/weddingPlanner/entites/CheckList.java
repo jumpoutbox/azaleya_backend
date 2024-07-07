@@ -35,9 +35,15 @@ public class CheckList implements Serializable{
 			inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<CheckListCategory> categoria = new HashSet<>();
 
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "tb_checklist_chklstsystemcategory",
+			joinColumns = @JoinColumn(name="checklist_id"),
+			inverseJoinColumns = @JoinColumn(name = "system_category_id"))
+	private Set<CheckListSystemCategory> system_category = new HashSet<>();
+
 	public CheckList(){}
 
-	public CheckList(String id, String toDo, String description, Instant tillDate, Boolean done, Users user, Set<CheckListCategory> categoria) {
+	public CheckList(String id, String toDo, String description, Instant tillDate, Boolean done, Users user, Set<CheckListCategory> categoria, Set<CheckListSystemCategory> system_category) {
 		this.id = id;
 		this.toDo = toDo;
 		this.description = description;
@@ -45,6 +51,7 @@ public class CheckList implements Serializable{
 		this.done = done;
 		this.user = user;
 		this.categoria = categoria;
+		this.system_category = system_category;
 	}
 
 	public String getId() {
@@ -101,5 +108,13 @@ public class CheckList implements Serializable{
 
 	public void setCategoria(Set<CheckListCategory> categoria) {
 		this.categoria = categoria;
+	}
+
+	public Set<CheckListSystemCategory> getSystem_category() {
+		return system_category;
+	}
+
+	public void setSystem_category(Set<CheckListSystemCategory> system_category) {
+		this.system_category = system_category;
 	}
 }

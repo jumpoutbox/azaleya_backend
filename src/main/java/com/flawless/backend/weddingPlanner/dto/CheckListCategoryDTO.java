@@ -1,6 +1,7 @@
 package com.flawless.backend.weddingPlanner.dto;
 
 import com.flawless.backend.weddingPlanner.entites.CheckListCategory;
+import com.flawless.backend.weddingPlanner.entites.CheckListSystemCategory;
 
 import java.io.Serializable;
 
@@ -19,6 +20,10 @@ public class CheckListCategoryDTO implements Serializable {
     }
 
     public CheckListCategoryDTO(CheckListCategory entity){
+        this.id = entity.getId();
+        this.nome = entity.getNome();
+    }
+    public CheckListCategoryDTO(CheckListSystemCategory entity){
         this.id = entity.getId();
         this.nome = entity.getNome();
     }
