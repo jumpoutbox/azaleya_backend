@@ -34,11 +34,16 @@ public class AuthorizationService implements UserDetailsService {
         }
     }
 
+    public void validateAdmin(String userId) {
+        Users user = authenticated();
+        if (!user.hasHole("admin")) {
+            throw new ForbiddenException("Access denied");
+        }
+    }
     public void validateSelfOrAdmin(String userId) {
         Users user = authenticated();
         if (!user.getId().equals(userId) && !user.hasHole("admin")) {
             throw new ForbiddenException("Access denied");
         }
     }
-
 }

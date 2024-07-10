@@ -2,6 +2,7 @@ package com.flawless.backend.weddingPlanner.dto;
 
 import com.flawless.backend.weddingPlanner.entites.Budget;
 import com.flawless.backend.weddingPlanner.entites.CheckList;
+import com.flawless.backend.weddingPlanner.entites.InfoDetails;
 import com.flawless.backend.weddingPlanner.entites.Users;
 
 import java.util.HashSet;
@@ -16,6 +17,7 @@ public class UsersDTO {
 	private String nome_parceiro;
 	private Set<CheckListDTO> toDoList = new HashSet<>();
 	private BudgetDTO budget;
+	private InfoDetailsDTO infoDetails;
 
 	public UsersDTO() {
 	}
@@ -34,11 +36,24 @@ public class UsersDTO {
 		this.email = users.getEmail();
 		this.telefone = users.getTelefone();
 		this.nome_parceiro = users.getNome_parceiro();
+		this.budget = new BudgetDTO(users.getBudget());
+		this.infoDetails = new InfoDetailsDTO(users.getInfoDetails());
+	}
+	public UsersDTO(Users entity, List<CheckList> todos, Budget budget1, InfoDetails info) {
+		this(entity);
+		todos.forEach(todo -> this.toDoList.add(new CheckListDTO(todo)));
+		new BudgetDTO(budget1);
+		new InfoDetailsDTO(info);
 	}
 	public UsersDTO(Users entity, List<CheckList> todos, Budget budget1) {
 		this(entity);
 		todos.forEach(todo -> this.toDoList.add(new CheckListDTO(todo)));
 		new BudgetDTO(budget1);
+	}
+	public UsersDTO(Users entity, List<CheckList> todos, InfoDetails info) {
+		this(entity);
+		todos.forEach(todo -> this.toDoList.add(new CheckListDTO(todo)));
+		new InfoDetailsDTO(info);
 	}
 
 	public UsersDTO(Users entity, List<CheckList> todos) {
@@ -100,5 +115,13 @@ public class UsersDTO {
 
 	public void setBudgetDTO(BudgetDTO budget) {
 		this.budget = budget;
+	}
+
+	public InfoDetailsDTO getInfoDetails() {
+		return infoDetails;
+	}
+
+	public void setInfoDetails(InfoDetailsDTO infoDetails) {
+		this.infoDetails = infoDetails;
 	}
 }

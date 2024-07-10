@@ -1,10 +1,8 @@
 package com.flawless.backend.weddingPlanner.services;
 
-import com.flawless.backend.weddingPlanner.dto.BudgetDTO;
-import com.flawless.backend.weddingPlanner.entites.Budget;
-import com.flawless.backend.weddingPlanner.entites.Users;
-import com.flawless.backend.weddingPlanner.repository.BudgetRepository;
-import com.flawless.backend.weddingPlanner.repository.UsersRepository;
+import com.flawless.backend.weddingPlanner.dto.InfoDetailsDTO;
+import com.flawless.backend.weddingPlanner.entites.InfoDetails;
+import com.flawless.backend.weddingPlanner.repository.InfoDetailsRepository;
 import com.flawless.backend.weddingPlanner.services.exception.DataBaseException;
 import com.flawless.backend.weddingPlanner.services.exception.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
@@ -19,46 +17,47 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class BudgetServices {
+public class InfoDetailsServices {
     @Autowired
-    private BudgetRepository budgetRepository;
+    private InfoDetailsRepository infoDetailsRepository;
     @Autowired
     private AuthorizationService authService;
 
     @Transactional(readOnly = true)
-    public List<BudgetDTO> findAll(){
-        List<Budget> list = budgetRepository.findAll();
-        return list.stream().map(x -> new BudgetDTO(x)).collect(Collectors.toList());
+    public List<InfoDetailsDTO> findAll(){
+        List<InfoDetails> list = infoDetailsRepository.findAll();
+        return list.stream().map(x -> new InfoDetailsDTO(x)).collect(Collectors.toList());
     }
     @Transactional(readOnly = true)
-    public BudgetDTO findById(String id){
-        Optional<Budget> obj = budgetRepository.findById(id);
-        Budget entity = obj.orElseThrow(()->new ResourceNotFoundException("Entity not found!"));
-        return new BudgetDTO(entity, entity.getUser());
+    public InfoDetailsDTO findById(String id){
+        Optional<InfoDetails> obj = infoDetailsRepository.findById(id);
+        InfoDetails entity = obj.orElseThrow(()->new ResourceNotFoundException("Entity not found!"));
+        return new InfoDetailsDTO(entity, entity.getUser());
     }
     @Transactional
-    public BudgetDTO insert(BudgetDTO dto) {
-        Budget entity = new Budget();
-        entity.setBudget(dto.getBudget());
+    public InfoDetailsDTO insert(InfoDetailsDTO dto) {
+        InfoDetails entity = new InfoDetails();
+        entity.setDataCasamento(dto.getDataCasamento());
         entity.setUser(authService.authenticated());
-        entity = budgetRepository.save(entity);
-        return new BudgetDTO(entity);
+        entity = infoDetailsRepository.save(entity);
+        return new InfoDetailsDTO(entity);
     }
     @Transactional
-    public BudgetDTO update(String id, BudgetDTO dto) {
+    public InfoDetailsDTO update(String id, InfoDetailsDTO dto) {
         try{
-            Budget entity = budgetRepository.getReferenceById(id);
-            entity.setBudget(dto.getBudget());
-            entity = budgetRepository.save(entity);
-            return new BudgetDTO(entity);
+            InfoDetails entity = infoDetailsRepository.getReferenceById(id);
+            entity.setDataCasamento(dto.getDataCasamento());
+            entity = infoDetailsRepository.save(entity);
+            return new InfoDetailsDTO(entity);
         }catch (EntityNotFoundException e){
             throw new ResourceNotFoundException("Id not found "+ id);
         }
     }
+
     @Transactional
     public void delete(String id) {
         try {
-            budgetRepository.deleteById(id);
+            infoDetailsRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException("Id not found "+id);
         }

@@ -44,6 +44,9 @@ public class Users implements UserDetails, Serializable {
 	@OneToOne(mappedBy = "user")
 	private Budget budget;
 
+	@OneToOne(mappedBy = "user")
+	private InfoDetails infoDetails;
+
 	public Users() {
 
 	}
@@ -55,6 +58,9 @@ public class Users implements UserDetails, Serializable {
 		this.nome_parceiro=nome_parceiro;
 		this.password = password;
 	}
+
+
+
 	public Users(String id, String nome, String email, int telefone, String nome_parceiro, String password, UserRole role) {
 		this.id=id;
 		this.nome=nome;
@@ -110,6 +116,14 @@ public class Users implements UserDetails, Serializable {
 
 	public void setBudget(Budget budget) {
 		this.budget = budget;
+	}
+
+	public InfoDetails getInfoDetails() {
+		return infoDetails;
+	}
+
+	public void setInfoDetails(InfoDetails infoDetails) {
+		this.infoDetails = infoDetails;
 	}
 
 	public String getPassword() {

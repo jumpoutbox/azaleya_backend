@@ -17,7 +17,6 @@ public class Budget implements Serializable {
     private String id;
     private Double budget;
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Users user;

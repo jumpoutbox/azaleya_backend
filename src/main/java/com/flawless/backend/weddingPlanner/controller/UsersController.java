@@ -38,6 +38,11 @@ public class UsersController {
 		UsersDTO dto = services.findByID(id);
 		return ResponseEntity.ok(dto);
 	}
+	@GetMapping(value = "/perfil")
+	public ResponseEntity<UsersDTO> perfil() {
+		UsersDTO dto = services.perfil();
+		return ResponseEntity.ok(dto);
+	}
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<UsersDTO> updateUser(@PathVariable String id, @RequestBody UsersDTO dto) {
 		dto = services.update(id, dto);
